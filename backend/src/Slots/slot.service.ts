@@ -33,9 +33,11 @@ export class SlotService {
     // Тут нужен кеш поиска, т.к. поиск сейчас работает по всему массиву.
     private filterSlots(slots: Slot[], search?: string): Slot[] {
         if (!search) return slots;
+        
         const searchLower = search.toLowerCase();
         return slots.filter((s) =>
-            s.title?.toLowerCase().includes(searchLower),
+            s.title?.toLowerCase().includes(searchLower) ||
+            s.id?.toString().includes(searchLower)
         );
     }
     // Конечно тут можно сделать оптимизацию не сохраняя просто шаги, а именно, что ещё на этапе добавление stepsOrder сделать поверки, но даже тут времени не сильно много уходит, если конечно представить 1000000 перестановок, то да это костыль, но обычный пользователь столько не выдаст
