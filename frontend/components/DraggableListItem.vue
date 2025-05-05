@@ -9,7 +9,7 @@
             @change="handleSelect"
             class="mr-3 h-4 w-4"
         />
-        <span class="text-gray-700">{{ item.title || `Item ${item.id}` }} ({{ item.id }})</span>
+        <span class="text-gray-700">{{ `Item ${item.id}` }}</span>
     </div>
 </template>
 

@@ -20,7 +20,7 @@ export class SlotService {
         page: number,
         limit: number,
         search?: string,
-    ): { slots: Slot[]; total: number } {
+    ): { slots: Slot[]; total: number, search?: string } {
         const filtered = this.filterSlots(this.allSlots, search);
         const ordered = this.applyCustomOrder([...filtered]);
         const paginated = this.paginate(ordered, page, limit);
@@ -28,6 +28,7 @@ export class SlotService {
         return {
             slots: this.markSelected(paginated),
             total: ordered.length,
+            search
         };
     }
     // Тут нужен кеш поиска, т.к. поиск сейчас работает по всему массиву.
@@ -36,7 +37,6 @@ export class SlotService {
         
         const searchLower = search.toLowerCase();
         return slots.filter((s) =>
-            s.title?.toLowerCase().includes(searchLower) ||
             s.id?.toString().includes(searchLower)
         );
     }
